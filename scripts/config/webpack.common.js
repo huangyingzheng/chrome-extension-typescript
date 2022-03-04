@@ -1,10 +1,13 @@
 const path = require('path')
 const { isDev, PROJECT_PATH } = require('./../contant')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    app: path.resolve( PROJECT_PATH, './src/index.tsx')
+    "popup": path.resolve( PROJECT_PATH, './src/index.tsx'),
+    "background": path.resolve( PROJECT_PATH, './src/index.tsx')
   },
   output: {
     // filename: `js/[name]${isDev ? '' : '.[hash:8]'}.js`,
@@ -15,10 +18,12 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js', '.json'],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(PROJECT_PATH, './public/index.html'),
-      filename: 'index.html',
+      template: path.resolve(PROJECT_PATH, './templates/index.html'),
+      filename: 'popup.html',
       cache: false,
+      chunks: ['popup'],
       minify: isDev ? false : {
         removeAttributeQuotes: true,
         collapseWhitespace: true,
@@ -33,7 +38,32 @@ module.exports = {
         minifyURLs: true,
         useShortDoctype: true
       }
-    })
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(PROJECT_PATH, './templates/index.html'),
+      filename: 'background.html',
+      cache: false,
+      chunks: ['background'],
+      minify: isDev ? false : {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+        removeComments: true,
+        collapseBooleanAttributes: true,
+        collapseInlineTagWhitespace: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        minifyCSS: true,
+        minifyJS: true,
+        minifyURLs: true,
+        useShortDoctype: true
+      }
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "public", to: "./" },
+      ],
+    }),
   ],
   module: {
     rules: [
