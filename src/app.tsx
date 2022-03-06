@@ -5,14 +5,15 @@ import icon from 'img/safe.png';
 
 const Index = (): ReactElement => {
   return (
-    <div id='container'>
-      <header>
-        <div className='flex-wrapper'>
-          <img src={icon} alt="icon" className='icon' />
-          <div></div>
+    <div className='app'>
+      <div className='app-header'></div>
+      <div className='main-container-wrapper'>
+        <div className='main-container'>
+          <div className='menu-bar'></div>
+          <div className='balance-area'></div>
+          <div className='tabs'></div>
         </div>
-      </header>
-      <div></div>
+      </div>
     </div>
   )
 }
