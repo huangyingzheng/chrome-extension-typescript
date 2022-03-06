@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
+import { Button } from 'antd';
+import './index.less'
+import icon from 'img/safe.png';
 
-interface IProps {
-  name: string
-  age: number
-}
-
-function App(props: IProps) {
-  const { name, age } = props
+const Index = (): ReactElement => {
   return (
-    <div className='app'>
-      <span>{`Hello! I'm ${name}, ${age} years old.`}</span>
+    <div id='container'>
+      <header>
+        <div className='flex-wrapper'>
+          <img src={icon} alt="icon" className='icon' />
+          <div></div>
+        </div>
+      </header>
+      <div></div>
     </div>
   )
 }
-
-export default App
+export default Index

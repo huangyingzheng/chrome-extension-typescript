@@ -2,12 +2,11 @@ const path = require('path')
 const { isDev, PROJECT_PATH } = require('./../contant')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    "popup": path.resolve( PROJECT_PATH, './src/index.tsx'),
-    "background": path.resolve( PROJECT_PATH, './src/index.tsx')
+    "popup": path.resolve( PROJECT_PATH, './src/popup.tsx'),
+    "background": path.resolve( PROJECT_PATH, './src/background.tsx')
   },
   output: {
     // filename: `js/[name]${isDev ? '' : '.[hash:8]'}.js`,
@@ -16,9 +15,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
+    alias: {
+      img: path.resolve(PROJECT_PATH, './images')
+    }
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(PROJECT_PATH, './templates/index.html'),
       filename: 'popup.html',
@@ -62,6 +63,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "public", to: "./" },
+        { from: "images", to: "./" },
       ],
     }),
   ],
@@ -89,6 +91,9 @@ module.exports = {
             loader: 'less-loader',
             options: {
               sourceMap: isDev,
+              lessOptions: {
+                javascriptEnabled: true,
+              }
             },
           },
         ]
