@@ -16,7 +16,8 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
     alias: {
-      img: path.resolve(PROJECT_PATH, './images')
+      img: path.resolve(PROJECT_PATH, './images'),
+      Src: path.resolve(PROJECT_PATH, './src')
     }
   },
   plugins: [

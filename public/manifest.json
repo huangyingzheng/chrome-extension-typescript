@@ -17,6 +17,7 @@
      "default_popup": "popup.html",
      "default_title": "MetaMask"
   },
+  "default_locales":"cn",
   "permissions": [ "storage", "unlimitedStorage", "clipboardWrite", "http://localhost:9000//", "https://*.infura.io/", "https://wallet.gridplus.io/*", "activeTab", "webRequest", "*://*.eth/", "notifications" ],
   "web_accessible_resources": [ "inpage.js", "phishing.html" ]
 }
