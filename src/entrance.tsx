@@ -1,6 +1,14 @@
 import React, { ReactElement } from 'react'
+import icon from 'img/safe.png'
+import { Outlet } from 'react-router-dom'
+import './index.less'
 
-const Entrance = (): ReactElement => {
+interface IProps {
+  name?: string;
+  children?: React.ReactNode
+}
+const Entrance = (props: IProps): ReactElement => {
+  console.log('props', props)
   return (
     <div className='main-container-wrapper'>
       <div className='main-container'>
@@ -8,6 +16,7 @@ const Entrance = (): ReactElement => {
         <div className='balance-area'></div>
         <div className='tabs'></div>
       </div>
+      <Outlet />
     </div>
   )
 } 

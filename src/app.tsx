@@ -1,24 +1,27 @@
-import React, { ReactElement, Suspense, LazyExoticComponent, FC as FunctionalComponent, lazy } from 'react'
-import { Route, Routes, HashRouter as Router} from 'react-router-dom'
+import React, { ReactElement } from 'react'
+import { useRoutes } from 'react-router-dom'
 // import { Button } from 'antd';
 import './index.less'
 import routes from 'Src/routes'
-// import icon from 'img/safe.png';
-import SuspenseFallback from './suspenseFallback';
+import icon from 'img/safe.png';
 
 const Index = (): ReactElement => {
+  let element = useRoutes(routes);
   return (
     <div className='app'>
-      <div className='app-header'></div>
-      {/* <Suspense fallback={<SuspenseFallback />}> */}
-        <Router>
-          <Routes>
-            {routes.map((route, i) => {
-              return <Route path={route.path} element={ route.element } key={i}/>
-            })}
-          </Routes>
-        </Router>
-      {/* </Suspense> */}
+      <div className='app-header'>
+        <img src={icon} alt="" />
+        <div className='tooltips'>
+          <div className='tooltips-network'>
+            <i></i>主网络
+          </div>
+        </div>
+      </div>
+      {element}
+      <div className='app-footer'>
+        需要帮助？请联系
+        <a>XXX支持</a>
+      </div>
     </div>
   )
 }
